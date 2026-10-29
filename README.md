@@ -134,9 +134,9 @@ Similarity scores identify submissions that may require further review; they do 
 
 ## 👨‍💻 Author
 
-**Megha Khairnar**
+**Faizan Khan**
 
-GitHub: [MeghaKhairnar](https://github.com/MeghaKhairnar)
+GitHub: [FaizanKhan21](https://github.com/Faizan-Khan21)
 
 Project Repository: [Plagiarism-and-Similarity-Checker](https://github.com/faizan-khan21/Plagiarism-and-Similarity-Checker)
 
