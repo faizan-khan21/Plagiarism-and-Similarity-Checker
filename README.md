@@ -1,73 +1,143 @@
 # Plagiarism / Similarity Checker for Code & Text Assignments
 
-A Java/Spring Boot web application that helps instructors detect similarity between student submissions — both plain-text assignments and programming assignments. For code, it goes beyond naive text-diffing by comparing **structural similarity using Abstract Syntax Trees (ASTs)**, catching cases where variable names were renamed or code was reordered but the underlying logic was copied.
+A **Java/Spring Boot web application** that helps instructors detect potentially similar student submissions, including text assignments and Java programming assignments. The system is designed to combine text similarity algorithms with **Abstract Syntax Tree (AST)-based code analysis**.
 
 Built as a semester project for B.Tech CSE (Object-Oriented Programming).
 
-## Problem Statement
+---
 
-Manually comparing dozens of submissions for plagiarism is impractical, and simple text-diff tools miss disguised code plagiarism — renamed variables, reordered functions, reformatted code. This tool gives instructors a structure-aware, automated first pass.
+## 📋 Features
 
-## Features
+- **Batch Submission:** Upload multiple student submissions for an assignment.
+- **Text Similarity:** Compare text using cosine similarity and Levenshtein distance.
+- **Code Similarity:** Analyze Java source code using JavaParser and AST-based structural comparison.
+- **Configurable Threshold:** Flag submission pairs above a selected similarity score.
+- **Dashboard:** View similarity scores and flagged submissions.
+- **Side-by-Side Comparison:** Review potentially similar submissions.
+- **PDF Reports:** Export analysis results for instructor review.
+- **Result History:** Store batches, submissions, and similarity results.
 
-- **Batch submission handling** — upload a full class's submissions (text files or source code) in one run
-- **Text similarity** — TF-IDF cosine similarity and Levenshtein distance for plain-text assignments
-- **Code similarity** — AST-based structural comparison (via JavaParser) that ignores variable names, comments, and formatting
-- **Configurable threshold** — flag pairs above a set similarity score for review
-- **Instructor dashboard** — pairwise similarity heatmap, side-by-side diff viewer for flagged pairs
-- **Reporting** — export flagged results as PDF; store past runs per assignment/batch
+---
 
-## Tech Stack
+## 🛠 Technologies Used
 
-| Layer | Technology |
-|---|---|
-| Language | Java |
-| Backend | Spring Boot |
-| Code Parsing (AST) | JavaParser (MVP scope; ANTLR multi-language support is future scope) |
-| Text Similarity | Apache Commons Text / custom cosine similarity & Levenshtein |
-| Database | H2 (default, in-memory for dev) → MySQL switchover-ready for production |
-| Frontend | Thymeleaf (server-side templating) |
-| Visualization | Chart.js / D3.js for the similarity heatmap |
-| PDF Export | iText |
-| Build Tool | Maven |
-| Version Control | Git & GitHub |
+- Java
+- Spring Boot
+- Spring MVC
+- Thymeleaf
+- MySQL / H2 Database
+- Spring Data JPA / Hibernate
+- JavaParser
+- Apache Commons Text
+- Bootstrap
+- Chart.js
+- Maven
+- JUnit 5
+- Git & GitHub
 
-## Core Data Model
+---
 
-Three shared entities underpin both the similarity engine and the dashboard:
+## 📁 Project Structure
 
-- `Submission` — an individual student's text/code file
-- `Batch` — a group of submissions for one assignment run
-- `SimilarityResult` — a computed pairwise score between two submissions
+```text
+Plagiarism-and-Similarity-Checker
+│
+├── src
+│   ├── main
+│   │   ├── java/com/myteam/plagiarismchecker
+│   │   │   ├── controller
+│   │   │   ├── entity
+│   │   │   ├── repository
+│   │   │   ├── service
+│   │   │   ├── analyzer
+│   │   │   └── config
+│   │   │
+│   │   └── resources
+│   │       ├── templates
+│   │       ├── static
+│   │       └── application.properties
+│   │
+│   └── test
+│
+├── pom.xml
+└── README.md
+```
 
-## Status
+---
 
-🚧 Early build phase — stack and module ownership are finalized; core entity field definitions (`Submission`, `Batch`, `SimilarityResult`) are being locked before implementation begins in earnest.
+## 🗄 Core Data Model
 
-## Getting Started
+- **Batch:** Stores assignment details and analysis settings.
+- **Submission:** Stores student submission metadata.
+- **SimilarityResult:** Stores similarity scores between two submissions.
+
+---
+
+## ⚙ Installation
+
+### Clone Repository
 
 ```bash
-# Clone the repo
-git clone <repo-url>
-cd <repo-name>
+git clone https://github.com/faizan-khan21/Plagiarism-and-Similarity-Checker.git
+cd Plagiarism-and-Similarity-Checker
+```
 
-# Build with Maven
+### Build the Project
+
+```bash
 mvn clean install
+```
 
-# Run the Spring Boot app
+### Run the Application
+
+```bash
 mvn spring-boot:run
 ```
 
-The app will be available at `http://localhost:8080` (H2 in-memory DB by default).
+Open the application at:
 
-## Evaluation
+`http://localhost:8080`
 
-Validated by seeding a test batch with deliberately plagiarized submissions (renamed variables, reordered code) alongside genuinely original ones, then measuring flagging accuracy against the known planted cases.
+Ensure Java and Maven are installed and the database configuration in `application.properties` matches your environment.
 
-## Future Scope
+---
 
-- Additional language support (C++, JavaScript) via ANTLR grammars
-- Cross-semester / cross-batch plagiarism detection
-- LMS integration (Moodle, Google Classroom) for direct submission ingestion
-- ML-based similarity scoring trained on labeled plagiarism examples
- 
+## 🏗 System Workflow
+
+1. Create an assignment batch.
+2. Upload student submissions.
+3. Validate and preprocess the uploaded files.
+4. Calculate text or code similarity for each unique pair.
+5. Flag pairs exceeding the configured threshold.
+6. Review results on the dashboard.
+7. Export a report for further investigation.
+
+---
+
+## 🚀 Future Enhancements
+
+- Support for Python, C++, and JavaScript.
+- Improved AST-based structural comparison.
+- Cross-batch plagiarism detection.
+- Interactive similarity heatmaps.
+- Authentication and role-based access.
+- Moodle and Google Classroom integration.
+- ML-based similarity scoring.
+
+---
+
+## ⚠️ Note
+
+Similarity scores identify submissions that may require further review; they do not independently prove plagiarism. Actual features depend on the current implementation.
+
+---
+
+## 👨‍💻 Author
+
+**Megha Khairnar**
+
+GitHub: [MeghaKhairnar](https://github.com/MeghaKhairnar)
+
+Project Repository: [Plagiarism-and-Similarity-Checker](https://github.com/faizan-khan21/Plagiarism-and-Similarity-Checker)
+
+⭐ If you find this project useful, consider giving the repository a star!
